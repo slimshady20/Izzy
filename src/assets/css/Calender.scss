@@ -1,0 +1,61 @@
+.Calendar{
+  user-select: none;
+  .head{
+    ...
+  }
+  .body{
+    .row{
+      display: flex;
+      cursor: pointer;
+      &:first-child{
+        cursor: initial;
+        .box{
+          font-weight: bold;
+        }
+        .box:hover > span.text{
+          background-color: white;
+        }
+      }
+      .box{
+        position: relative;
+        display: inline-flex;
+        width: calc(100%/7);
+        height: 0;
+        padding-bottom: calc(100%/7);
+        font-size: 12pt;
+        &:first-child{
+          color: red;
+        }
+        &:last-child{
+          color: #588dff;
+        }
+        &.grayed{
+          color: gray;
+        }
+        &:hover{
+          span.text{
+            background-color: rgba(#588dff, 0.1);
+          }
+        }
+        &.selected{
+          span.text{
+            background-color: #588dff;
+            color: white;
+          }
+        }
+        span.text{
+          border-radius: 100%;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          width: 60%;
+          height: 60%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+        }
+      }
+    }
+  }
+}

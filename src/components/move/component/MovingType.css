@@ -1,0 +1,43 @@
+.mtPhoto{
+    heigth:150px;
+    width: 150px;
+    margin:30px;
+
+
+}
+.mtPhoto1{
+    display: inline;
+}
+.mtPhoto2{
+    heigth:150px;
+    width: 150px;
+    margin:30px;
+
+    display:inline-grid;
+    left:50px;
+}
+.mtPhoto3{
+    heigth:150px;
+    width: 150px;
+    margin:30px;
+
+    display:inline-grid;
+    left:250px;
+}
+.mtPhoto4{
+     heigth:150px;
+     width: 150px;
+     margin:30px;
+    display:inline-grid;
+    left:450px;
+ }
+.mtPhoto5{
+    heigth:150px;
+    width: 150px;
+    margin:30px;
+
+    display:inline-grid;
+    left:650px;
+
+}
+
