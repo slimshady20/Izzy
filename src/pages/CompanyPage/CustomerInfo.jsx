@@ -38,7 +38,7 @@ const center = {
 };
 const locations = [
     {
-     name: "고객님 거주지",
+     name: "홍두깨님 거주지",
         location: {
             lat: 37.57822294432912,
             lng: 126.92318541124448,
@@ -207,7 +207,7 @@ const CustomerInfo=()=> {
                                              clickable={true}
                                              onCloseClick={()=>setInitialSelected({})}
                                          >
-                                             <h5>{initialSelected.name}</h5>
+                                             <h5>{initialSelected.name}:<br/> {selectedAddr}</h5>
                                          </InfoWindow>
                                      )
                                  }
@@ -237,11 +237,11 @@ const CustomerInfo=()=> {
                                          <div>
                                              <h4>
                                                    <span role="img" aria-label="bear">
-                                                     🐻{selectedAddr}
-                                                   </span>{" "}
+                                                    주소
+                                                   </span>
 
                                              </h4>
-                                             <p >Spotted{} </p>
+                                             <p >{selectedAddr} </p>
                                          </div>
                                      </InfoWindow>
                                  ) : null}
@@ -257,7 +257,8 @@ function Locate({ panTo }) {
     return (
         <button
             className="locate"
-            onClick={() => {
+            onClick={(e) => {
+                e.preventDefault()
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
                         panTo({
