@@ -5,7 +5,7 @@ import '../assets/css/main.css'
 
 import {Main, Notice, Community, Contacts} from '../pages/index'
 import {Navigator, Footer} from "../commons/index";
-import {CustomerInfo, Mypage, Order, Payment, Statistics,GoogleMapClass} from "./CompanyPage";
+import {CustomerInfo, Mypage, Order, Payment, Statistics} from "./CompanyPage";
 import {Signup,Login} from "./Account";
 
 const Home = () => {

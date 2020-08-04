@@ -192,7 +192,8 @@ export default function SelectSearchTopReverse() {
     });
 
     return (
-        <div>
+        <div style={{padding:'1rem', margin:'0 auto', maxWidth:1200}}
+        >
             <h1 className="text-center" style={{padding:'1rem'}}>이사 접수 </h1>
 
         <MDBDataTableV5
@@ -206,7 +207,6 @@ export default function SelectSearchTopReverse() {
             searchTop
             searchBottom={false}
             barReverse
-            style={{padding:'1rem', margin:'0 auto', maxWidth:1200}}
         />
         </div>
     );
