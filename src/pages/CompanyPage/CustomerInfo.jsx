@@ -50,13 +50,13 @@ const locations = [
 const CustomerInfo=()=> {
     const [searchMarker, setSearchMarker]= useState(false)
     const [searchSelected, setSearchSelected]= useState({lat:'', lng: ''})
-
+    const[searchedAddr, setSearchedAddr]= useState("")
     const [infoShow, setInfoShow]= useState(false)
     const[selectedAddr, setSelectedAddr]= useState("")
     const [selected, setSelected] = useState({lat:'', lng: ''})
 
-    Geocode.fromLatLng(selected.lat,selected.lng).then(
-        response => {
+    Geocode.fromLatLng(selected.lat,selected.lng)
+        .then(response => {
             const address = response.results[0].formatted_address;
             setSelectedAddr(address)
             console.log(address);
@@ -169,7 +169,8 @@ const CustomerInfo=()=> {
                             <br/><br/>
 
                             <Locate panTo={panTo} />
-                            <Search panTo={panTo} setPosition={setSearchSelected} setMarkerShow={setSearchMarker}/>
+                            <Search panTo={panTo} setPosition={setSearchSelected} setMarkerShow={setSearchMarker}
+                                    setSearchedAddr={setSearchedAddr}/>
                             panTo
                             <GoogleMap
                                 id="map"
@@ -180,18 +181,6 @@ const CustomerInfo=()=> {
                                 onClick={onMapClick}
                                 onLoad={onMapLoad}
                             >
-                                {
-                                    searchMarker &&
-                                        <Marker position={searchSelected}
-                                                icon={{
-                                                    url: `/movingCar.png`,
-                                                    origin: new window.google.maps.Point(0, 0),
-                                                    anchor: new window.google.maps.Point(15, 15),
-                                                    scaledSize: new window.google.maps.Size(30, 30),
-                                                }}>
-                                        </Marker>
-
-                                }
                                 <Marker position={center}
                                         icon={{
                                             url: `/home.svg`,
@@ -199,6 +188,21 @@ const CustomerInfo=()=> {
                                             anchor: new window.google.maps.Point(15, 15),
                                             scaledSize: new window.google.maps.Size(45, 45),
                                         }}/>
+                                {
+                                    searchMarker &&
+                                    <Marker position={searchSelected}
+                                            icon={{
+                                                url: `/movingCar.png`,
+                                                origin: new window.google.maps.Point(0, 0),
+                                                anchor: new window.google.maps.Point(15, 15),
+                                                scaledSize: new window.google.maps.Size(30, 30),
+                                            }}>
+                                        <InfoWindow>
+                                            <h5>{searchedAddr}</h5>
+                                        </InfoWindow>
+                                    </Marker>
+                                }
+
                                 {
                                     locations.map(item => {
                                         return (
@@ -291,7 +295,8 @@ function Locate({ panTo }) {
         </button>
     );
 }
-function Search({ panTo, setPosition,setMarkerShow }) {
+function Search({ panTo, setPosition,setMarkerShow,setSearchedAddr }) {
+
     const {ready, value, suggestions: { status, data }, setValue,
         clearSuggestions,
     } = usePlacesAutocomplete({
@@ -315,14 +320,14 @@ function Search({ panTo, setPosition,setMarkerShow }) {
 
         try {
             const results = await getGeocode({ address });
-            // console.log(results[0]) formatted address, compo 전부 가져옴
+             console.log(results[0]) // formatted address, compo 전부 가져옴
             const { lat, lng } = await getLatLng(results[0]);
             console.log(address)
             console.log(lat,lng)
             panTo({ lat, lng });
             setPosition({lat,lng})
             setMarkerShow(true)
-
+            setSearchedAddr(address)
         } catch (error) {
             console.log("😱 Error: ", error);
         }

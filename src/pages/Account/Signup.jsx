@@ -10,10 +10,13 @@ const Signup = () => {
     const[name,setName]= useState("")
     const[addr,setAddr]=useState("")
     const[email,setEmail]=useState("")
-
+    const onSubmit= (e)=>{
+        e.preventDefault()
+    }
 
     return (
-        <div  style={{padding:'6rem', margin:'0 auto', maxWidth:800, maxHeight: 1000}}>
+        <form style={{padding:'6rem', margin:'0 auto', maxWidth:800, maxHeight: 1000}}>
+
             <section>
                 <div className="container" style={{maxHeight: 1000}}>
                     <div className="row">
@@ -68,7 +71,7 @@ const Signup = () => {
                                     <MDBInput
                                         label="이메일 주소를 입력해주세요"
                                         group
-                                        type="text"
+                                        type="email"
                                         validate
                                         containerClass="mb-0"
                                         value={email}
@@ -78,14 +81,16 @@ const Signup = () => {
 
                                     <div className="text-center mb-3">
                                         <MDBBtn
-                                            type="button"
+                                            type="submit"
                                             gradient="blue"
                                             rounded
                                             className="btn-block z-depth-1a"
+                                            onClick={onSubmit}
                                         >
                                             회원가입 하기
                                         </MDBBtn>
                                     </div>
+
                                     <div className="row my-3 d-flex justify-content-center">
                                     </div>
                                 </MDBCardBody>
@@ -103,7 +108,7 @@ const Signup = () => {
                     </div>
                 </div>
             </section>
-        </div>
+        </form>
     );
 };
 
