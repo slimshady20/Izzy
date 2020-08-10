@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {
 	MDBBtn,
 	MDBCard,
@@ -9,8 +9,35 @@ import {
 	MDBInput,
 	MDBModalFooter,
 } from 'mdbreact';
+import axios from 'axios';
 
 const Login = () => {
+	const [userId, setUserId] = useState('');
+	const [password, setPassword] = useState('');
+	const history = useHistory();
+	const handleSubmit = e => {
+		e.preventDefault();
+		const userJson = {
+			userId: userId,
+			password: password,
+		};
+		axios
+			.post(`http://localhost:8080/users/login/`, userJson)
+			.then(response => {
+				console.log(response);
+				alert('로그인하였습니다.');
+				sessionStorage.setItem(
+					'MysessionStorageData',
+					JSON.stringify(response.data),
+				);
+				if (response.status === 200) history.push('/');
+			})
+			.catch(error => {
+				alert('아이디 혹은 비밀번호가 틀렸습니다.' );
+				throw error;
+			});
+	};
+
 	return (
 		<div style={{padding: '6rem', margin: '0 auto', maxWidth: 800}}>
 			<section>
@@ -25,19 +52,27 @@ const Login = () => {
 										</h3>
 									</div>
 									<MDBInput
-										label='Your ID'
+										label='아이디를 입력해주세요'
 										group
 										type='text'
 										validate
 										error='wrong'
 										success='right'
+										value={userId}
+										onChange={e =>
+											setUserId(e.target.value)
+										}
 									/>
 									<MDBInput
-										label='Your password'
+										label='비밀번호를 입력해주세요'
 										group
 										type='password'
 										validate
 										containerClass='mb-0'
+										value={password}
+										onChange={e =>
+											setPassword(e.target.value)
+										}
 									/>
 									<p className='font-small blue-text d-flex justify-content-end pb-3'>
 										Forgot
@@ -52,6 +87,7 @@ const Login = () => {
 												gradient='blue'
 												rounded
 												className='btn-block z-depth-1a'
+												onClick={handleSubmit}
 											>
 												Login
 											</MDBBtn>

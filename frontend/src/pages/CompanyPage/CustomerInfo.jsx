@@ -63,16 +63,16 @@ const CustomerInfo = () => {
 	const [selected, setSelected] = useState({lat: '', lng: ''});
 
 	Geocode.fromLatLng(selected.lat, selected.lng).then(
-		(response) => {
+		response => {
 			const address = response.results[0].formatted_address;
 			setSelectedAddr(address);
 			console.log(address);
 		},
-		(error) => {
+		error => {
 			console.error(error);
 		},
 	);
-	const onSelect = (item) => {
+	const onSelect = item => {
 		setInitialSelected(item);
 	};
 	const {isLoaded, loadError} = useLoadScript({
@@ -83,25 +83,24 @@ const CustomerInfo = () => {
 
 	const [initialSelected, setInitialSelected] = useState({});
 
-	const onMapClick = React.useCallback((e) => {
-		setMarkers((current) => [
+	const onMapClick = React.useCallback(e => {
+		setMarkers(current => [
 			...current,
 			{
 				lat: e.latLng.lat(),
 				lng: e.latLng.lng(),
-				time: new Date(),
 			},
 		]);
-	}, []);
+	}, []); // 컴포넌트가 처음 렌더링될 때만 함수 생성
 
 	const mapRef = React.useRef();
-	const onMapLoad = React.useCallback((map) => {
+	const onMapLoad = React.useCallback(map => {
 		mapRef.current = map;
 	}, []);
 
-	const panTo = React.useCallback(({lat, lng}) => {
-		//<Search panTo <- 여기로
-		mapRef.current.panTo({lat, lng});
+	const moveTo = React.useCallback(({lat, lng}) => {
+		//<Search moveTo <- 여기로
+		mapRef.current.moveTo({lat, lng});
 		mapRef.current.setZoom(14);
 	}, []);
 
@@ -119,9 +118,7 @@ const CustomerInfo = () => {
 					<MDBRow>
 						<MDBCol md='8' className='mb-3'>
 							<h2> 홍두꺠님 회원정보</h2>
-							<label htmlFor='defaultFormRegisterNameEx'>
-								이름
-							</label>
+							<label htmlFor='defaultFormRegisterNameEx'>이름</label>
 							<input
 								name='fname'
 								type='text'
@@ -130,9 +127,7 @@ const CustomerInfo = () => {
 								required
 								value='홍두깨'
 							/>
-							<label htmlFor='defaultFormRegisterNameEx'>
-								아이디
-							</label>
+							<label htmlFor='defaultFormRegisterNameEx'>아이디</label>
 							<input
 								name='fname'
 								type='text'
@@ -141,9 +136,7 @@ const CustomerInfo = () => {
 								required
 								value='Izzy2020'
 							/>
-							<label htmlFor='defaultFormRegisterNameEx'>
-								이메일
-							</label>
+							<label htmlFor='defaultFormRegisterNameEx'>이메일</label>
 							<input
 								name='fname'
 								type='text'
@@ -153,9 +146,7 @@ const CustomerInfo = () => {
 								required
 								value='izzy2020@gmail.com'
 							/>
-							<label htmlFor='defaultFormRegisterNameEx'>
-								거주지
-							</label>
+							<label htmlFor='defaultFormRegisterNameEx'>거주지</label>
 							<input
 								name='fname'
 								type='text'
@@ -166,9 +157,9 @@ const CustomerInfo = () => {
 							/>
 							<br />
 							<br />
-							<Locate panTo={panTo} />
+							<Locate moveTo={moveTo} />
 							<Search
-								panTo={panTo}
+								moveTo={moveTo}
 								setPosition={setSearchSelected}
 								setMarkerShow={setSearchMarker}
 								setSearchedAddr={setSearchedAddr}
@@ -186,18 +177,9 @@ const CustomerInfo = () => {
 									position={center}
 									icon={{
 										url: `/home.svg`,
-										origin: new window.google.maps.Point(
-											0,
-											0,
-										),
-										anchor: new window.google.maps.Point(
-											15,
-											15,
-										),
-										scaledSize: new window.google.maps.Size(
-											45,
-											45,
-										),
+										origin: new window.google.maps.Point(0, 0),
+										anchor: new window.google.maps.Point(15, 15),
+										scaledSize: new window.google.maps.Size(45, 45),
 									}}
 								/>
 								{searchMarker && (
@@ -205,18 +187,9 @@ const CustomerInfo = () => {
 										position={searchSelected}
 										icon={{
 											url: `/movingCar.png`,
-											origin: new window.google.maps.Point(
-												0,
-												0,
-											),
-											anchor: new window.google.maps.Point(
-												15,
-												15,
-											),
-											scaledSize: new window.google.maps.Size(
-												30,
-												30,
-											),
+											origin: new window.google.maps.Point(0, 0),
+											anchor: new window.google.maps.Point(15, 15),
+											scaledSize: new window.google.maps.Size(30, 30),
 										}}
 									>
 										<InfoWindow>
@@ -225,7 +198,7 @@ const CustomerInfo = () => {
 									</Marker>
 								)}
 
-								{locations.map((item) => {
+								{locations.map(item => {
 									return (
 										<Marker
 											key={item.name}
@@ -233,35 +206,24 @@ const CustomerInfo = () => {
 											onClick={() => onSelect(item)}
 											icon={{
 												url: `/movingCar.png`,
-												origin: new window.google.maps.Point(
-													0,
-													0,
-												),
-												anchor: new window.google.maps.Point(
-													15,
-													15,
-												),
-												scaledSize: new window.google.maps.Size(
-													30,
-													30,
-												),
+												origin: new window.google.maps.Point(0, 0),
+												anchor: new window.google.maps.Point(15, 15),
+												scaledSize: new window.google.maps.Size(30, 30),
 											}}
-										></Marker>
+										/>
 									);
 								})}
 								{initialSelected.location && (
 									<InfoWindow
 										position={initialSelected.location}
 										clickable={true}
-										onCloseClick={() =>
-											setInitialSelected({})
-										}
+										onCloseClick={() => setInitialSelected({})}
 									>
 										<h5>{initialSelected.name}</h5>
 									</InfoWindow>
 								)}
 
-								{markers.map((marker) => (
+								{markers.map(marker => (
 									<Marker
 										key={`${marker.lat}-${marker.lng}`}
 										position={{
@@ -274,18 +236,9 @@ const CustomerInfo = () => {
 										}}
 										icon={{
 											url: `/movingCar.png`,
-											origin: new window.google.maps.Point(
-												0,
-												0,
-											),
-											anchor: new window.google.maps.Point(
-												15,
-												15,
-											),
-											scaledSize: new window.google.maps.Size(
-												30,
-												30,
-											),
+											origin: new window.google.maps.Point(0, 0),
+											anchor: new window.google.maps.Point(15, 15),
+											scaledSize: new window.google.maps.Size(30, 30),
 										}}
 									/>
 								))}
@@ -301,10 +254,7 @@ const CustomerInfo = () => {
 									>
 										<div>
 											<h4>
-												<span
-													role='img'
-													aria-label='bear'
-												>
+												<span role='img' aria-label='bear'>
 													주소
 												</span>
 											</h4>
@@ -320,15 +270,15 @@ const CustomerInfo = () => {
 		</>
 	);
 };
-function Locate({panTo}) {
+function Locate({moveTo}) {
 	return (
 		<button
 			className='locate'
-			onClick={(e) => {
+			onClick={e => {
 				e.preventDefault();
 				navigator.geolocation.getCurrentPosition(
-					(position) => {
-						panTo({
+					position => {
+						moveTo({
 							lat: position.coords.latitude,
 							lng: position.coords.longitude,
 						});
@@ -341,7 +291,7 @@ function Locate({panTo}) {
 		</button>
 	);
 }
-function Search({panTo, setPosition, setMarkerShow, setSearchedAddr}) {
+function Search({moveTo, setPosition, setMarkerShow, setSearchedAddr}) {
 	const {
 		ready,
 		value,
@@ -356,12 +306,12 @@ function Search({panTo, setPosition, setMarkerShow, setSearchedAddr}) {
 	});
 	// https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
 
-	const handleInput = (e) => {
+	const handleInput = e => {
 		// Update the keyword of the input element
 		setValue(e.target.value);
 	};
 
-	const handleSelect = async (address) => {
+	const handleSelect = async address => {
 		// When user selects a place, we can replace the keyword without request data from API
 		// by setting the second parameter as "false"
 		setValue(address, false);
@@ -373,7 +323,7 @@ function Search({panTo, setPosition, setMarkerShow, setSearchedAddr}) {
 			const {lat, lng} = await getLatLng(results[0]);
 			console.log(address);
 			console.log(lat, lng);
-			panTo({lat, lng});
+			moveTo({lat, lng});
 			setPosition({lat, lng});
 			setMarkerShow(true);
 			setSearchedAddr(address);

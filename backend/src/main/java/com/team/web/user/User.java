@@ -22,6 +22,7 @@ public class User {
     @Column(name = "name") private String name;
     @Column(name = "password") private String password;
     @Column(name = "birth_date") private LocalDate birthDate;
+    @Column(name = "gender") private String gender;
     @Column(name = "phone_number") private String phoneNumber;
     @Column(name = "address") private String address;
     @Column(name = "email") private String email;

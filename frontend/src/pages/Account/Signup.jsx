@@ -8,7 +8,6 @@ import {
 	MDBModalFooter,
 } from 'mdbreact';
 import {Link} from 'react-router-dom';
-import {Button} from 'react-bootstrap';
 import {Postcode} from '../Account';
 import axios from 'axios';
 
@@ -21,8 +20,9 @@ const Signup = () => {
 	const [optionalAddr, setOptionalAddr] = useState('');
 	const [email, setEmail] = useState('');
 	const [birthDate, setBirthDate] = useState('');
+	const [gender, setGender] = useState('');
 
-	const handleIdCheck = (e) => {
+	const handleIdCheck = e => {
 		e.preventDefault();
 		axios
 			.get(`http://localhost:8080/users/checkId/${userId}`)
@@ -30,18 +30,19 @@ const Signup = () => {
 				alert('이미 존재하는 아이디입니다.');
 				setUserId('');
 			})
-			.catch((error) => {
+			.catch(error => {
 				alert('생성 가능한 아이디입니다.');
 			});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = e => {
 		e.preventDefault();
 		alert('회원가입 버튼 클릭');
 		const userJson = {
 			userId: userId,
 			password: password,
 			birthDate: birthDate,
+			gender: gender,
 			phoneNumber: phoneNumber,
 			name: name,
 			address: addr,
@@ -51,10 +52,10 @@ const Signup = () => {
 
 		axios
 			.post(`http://localhost:8080/users/signUp`, userJson)
-			.then((response) => {
+			.then(response => {
 				alert('성공');
 			})
-			.catch((error) => {
+			.catch(error => {
 				alert('실패');
 				throw error;
 			});
@@ -84,12 +85,8 @@ const Signup = () => {
 										group
 										type='text'
 										validate
-										error='wrong'
-										success='right'
 										value={userId}
-										onChange={(e) =>
-											setUserId(e.target.value)
-										}
+										onChange={e => setUserId(e.target.value)}
 									/>
 									<div>
 										<MDBBtn
@@ -107,9 +104,7 @@ const Signup = () => {
 										validate
 										containerClass='mb-0'
 										value={password}
-										onChange={(e) =>
-											setPassword(e.target.value)
-										}
+										onChange={e => setPassword(e.target.value)}
 									/>
 									<MDBInput
 										label='이름을 입력해주세요.'
@@ -118,9 +113,7 @@ const Signup = () => {
 										validate
 										containerClass='mb-0'
 										value={name}
-										onChange={(e) =>
-											setName(e.target.value)
-										}
+										onChange={e => setName(e.target.value)}
 									/>
 									<MDBInput
 										label='생년월일을 입력해주세요.'
@@ -129,10 +122,21 @@ const Signup = () => {
 										validate
 										containerClass='mb-0'
 										value={birthDate}
-										onChange={(e) =>
-											setBirthDate(e.target.value)
-										}
+										onChange={e => setBirthDate(e.target.value)}
 									/>
+									<p>성별</p>
+									<div className='input-group'>
+										<select
+											className='custom-select'
+											required
+											value={gender}
+											onChange={e => setGender(e.target.value)}
+										>
+											<option value=''>선택</option>
+											<option value='F'>여자</option>
+											<option value='M'>남자</option>
+										</select>
+									</div>
 									<MDBInput
 										label='전화번호를 입력해주세요.'
 										group
@@ -140,9 +144,7 @@ const Signup = () => {
 										validate
 										containerClass='mb-0'
 										value={phoneNumber}
-										onChange={(e) =>
-											setPhoneNumber(e.target.value)
-										}
+										onChange={e => setPhoneNumber(e.target.value)}
 									/>
 									<MDBInput
 										label='이메일 주소를 입력해주세요.'
@@ -151,9 +153,7 @@ const Signup = () => {
 										validate
 										containerClass='mb-0'
 										value={email}
-										onChange={(e) =>
-											setEmail(e.target.value)
-										}
+										onChange={e => setEmail(e.target.value)}
 									/>
 									<MDBInput
 										label='주소를 입력해주세요.'
@@ -162,9 +162,7 @@ const Signup = () => {
 										validate
 										containerClass='mb-0'
 										value={addr}
-										onChange={(e) =>
-											setAddr(e.target.value)
-										}
+										onChange={e => setAddr(e.target.value)}
 									/>
 									<div className='input-group-append'>
 										<Postcode onSelectedAddr={setAddr} />
@@ -176,9 +174,7 @@ const Signup = () => {
 										validate
 										containerClass='mb-0'
 										value={optionalAddr}
-										onChange={(e) =>
-											setOptionalAddr(e.target.value)
-										}
+										onChange={e => setOptionalAddr(e.target.value)}
 									/>
 
 									<div className='text-center mb-3'>
@@ -198,10 +194,7 @@ const Signup = () => {
 								<MDBModalFooter className='mx-5 pt-3 mb-1'>
 									<p className='font-small grey-text d-flex justify-content-end'>
 										이미 회원이세요?
-										<Link
-											to='/login'
-											className='blue-text ml-1'
-										>
+										<Link to='/login' className='blue-text ml-1'>
 											로그인 하기
 										</Link>
 									</p>

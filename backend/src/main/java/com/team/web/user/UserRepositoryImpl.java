@@ -14,10 +14,9 @@ public class UserRepositoryImpl  extends QuerydslRepositorySupport implements Cu
     @Autowired
     JPAQueryFactory queryFactory;
 
-     UserRepositoryImpl() {
+    UserRepositoryImpl() {
         super(User.class);
     }
-
     @Override
     public Optional<User> findByUserId(String userId) {
         QUser qUser = QUser.user;

@@ -12,9 +12,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    @Autowired UserService
-    userService;
-    @GetMapping(value="/checkId/{userId}")
+    @Autowired UserService userService;
+
+    @GetMapping("/checkId/{userId}")
     public ResponseEntity<User> checkId(@PathVariable String userId){
         Optional<User> checkIdResult= userService.findUserByUserId(userId);
         if(checkIdResult.isPresent()){
@@ -30,6 +30,20 @@ public class UserController {
             return ResponseEntity.ok().build();
         }else{
             return ResponseEntity.badRequest().build();
+        }
+    }
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User user) {
+        Optional<User> findUser = userService.findUserByUserId(user.getUserId());
+        if (findUser.isPresent()) {
+            User requestLoginUser = findUser.get();
+            if (user.getPassword().equals(requestLoginUser.getPassword())) {
+                return ResponseEntity.ok(requestLoginUser);
+            } else {
+                return ResponseEntity.badRequest().build();
+            }
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }
