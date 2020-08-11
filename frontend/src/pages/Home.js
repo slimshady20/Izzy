@@ -22,7 +22,7 @@ import {VideoUploadPage} from '../components';
 import MovingType from '../components/move/component/MovingType';
 import {MovingEstimateForm} from '../components/move/component';
 import {MovingStartPoint} from '../components/move/component/movingPoint/index';
-import {CustomerInfo, Mypage, Order, Payment, Statistics} from './CompanyPage';
+import {CustomerInfo, Mypage, Order, Statistics} from './CompanyPage';
 import {Signup, Login} from './Account';
 import ModalTest from '../components/modalTest/ModalTest';
 import VideoTest from '../components/videoUpload/VideoTest';
@@ -57,7 +57,6 @@ const Home = () => {
 				<Route path='/signup' component={Signup} />
 				<Route path='/mypage' component={Mypage} />
 				<Route path='/order' component={Order} />
-				<Route path='/payment' component={Payment} />
 				<Route path='/statistics' component={Statistics} />
 				<Route path='/customerinfo' component={CustomerInfo} />
 				<Route path={'/notice'} component={Notice} />

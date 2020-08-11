@@ -23,11 +23,13 @@ public class User {
     @Column(name = "password") private String password;
     @Column(name = "birth_date") private LocalDate birthDate;
     @Column(name = "gender") private String gender;
-    @Column(name = "phone_number") private String phoneNumber;
     @Column(name = "address") private String address;
+    @Column(name = "latitude") private String latitude;
+    @Column(name = "longitude") private String longitude;
     @Column(name = "email") private String email;
     @Column(name = "join_date") private LocalDate joinDate;
     @Column(name = "optional_addr") private String optionalAddr;
+    @Column(name = "phone_number") private String phoneNumber;
 
     @Builder
     private User(String userId,

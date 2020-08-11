@@ -19,10 +19,10 @@ import {
     ComboboxOption,
 } from "@reach/combobox";
 
-import '../CompanyPage/MapApi/Search.css'
+import '../CompanyPage/Map/Search.css'
 import "@reach/combobox/styles.css";
 
-import mapStyles from "../CompanyPage/MapApi/mapStyles";
+import mapStyles from "../CompanyPage/Map/mapStyles";
 Geocode.setApiKey("AIzaSyCrQuKKwt0DtPF8vxKPx6dRq3us6me2LO8");
 Geocode.setLanguage('ko')
 const libraries = ["places"];

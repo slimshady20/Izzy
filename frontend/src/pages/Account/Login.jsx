@@ -10,7 +10,6 @@ import {
 	MDBModalFooter,
 } from 'mdbreact';
 import axios from 'axios';
-
 const Login = () => {
 	const [userId, setUserId] = useState('');
 	const [password, setPassword] = useState('');
@@ -33,7 +32,7 @@ const Login = () => {
 				if (response.status === 200) history.push('/');
 			})
 			.catch(error => {
-				alert('아이디 혹은 비밀번호가 틀렸습니다.' );
+				alert('아이디 혹은 비밀번호가 틀렸습니다.');
 				throw error;
 			});
 	};
@@ -59,9 +58,7 @@ const Login = () => {
 										error='wrong'
 										success='right'
 										value={userId}
-										onChange={e =>
-											setUserId(e.target.value)
-										}
+										onChange={e => setUserId(e.target.value)}
 									/>
 									<MDBInput
 										label='비밀번호를 입력해주세요'
@@ -70,9 +67,7 @@ const Login = () => {
 										validate
 										containerClass='mb-0'
 										value={password}
-										onChange={e =>
-											setPassword(e.target.value)
-										}
+										onChange={e => setPassword(e.target.value)}
 									/>
 									<p className='font-small blue-text d-flex justify-content-end pb-3'>
 										Forgot
@@ -97,10 +92,7 @@ const Login = () => {
 								<MDBModalFooter className='mx-5 pt-3 mb-1'>
 									<p className='font-small grey-text d-flex justify-content-end'>
 										회원이 아니세요?
-										<Link
-											to='/signup'
-											className='blue-text ml-1'
-										>
+										<Link to='/signup' className='blue-text ml-1'>
 											회원가입하기
 										</Link>
 									</p>

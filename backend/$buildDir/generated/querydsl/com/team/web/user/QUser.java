@@ -25,9 +25,15 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath email = createString("email");
 
+    public final StringPath gender = createString("gender");
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final DatePath<java.time.LocalDate> joinDate = createDate("joinDate", java.time.LocalDate.class);
+
+    public final StringPath latitude = createString("latitude");
+
+    public final StringPath longitude = createString("longitude");
 
     public final StringPath name = createString("name");
 

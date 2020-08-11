@@ -24,4 +24,20 @@ public class UserRepositoryImpl  extends QuerydslRepositorySupport implements Cu
 
         return Optional.ofNullable(findOne);
     }
+    @Override
+    public Optional<User> findUserId(String name, String phone) {
+        QUser qUser = QUser.user;
+        User findId = queryFactory.selectFrom(qUser).where(qUser.name.eq(name)).fetchOne();
+        return Optional.ofNullable(findId);
+    }
+
+    @Override
+    public Optional<User> findUserPw(String userId, String name, String phone) {
+        QUser qUser = QUser.user;
+        User findPw = queryFactory.selectFrom(qUser).where(qUser.userId.eq(userId), qUser.name.eq(name), qUser.phone.eq(phone)).fetchOne();
+
+        return Optional.ofNullable(findPw);
+    }
+
+
 }
