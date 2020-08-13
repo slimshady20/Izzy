@@ -22,6 +22,7 @@ import {
 import './Map/Search.css';
 import '@reach/combobox/styles.css';
 import mapStyles from './Map/mapStyles';
+
 Geocode.setApiKey('AIzaSyCrQuKKwt0DtPF8vxKPx6dRq3us6me2LO8');
 Geocode.setLanguage('ko');
 const libraries = ['places'];
@@ -58,6 +59,7 @@ const CustomerInfo = () => {
 		response => {
 			const address = response.results[0].formatted_address;
 			setSelectedAddr(address);
+			console.log(response);
 			console.log(address);
 		},
 		error => {
@@ -316,6 +318,7 @@ function Search({panTo, setPosition, setMarkerShow, setSearchedAddr}) {
 			console.log(address);
 			console.log(lat, lng);
 			panTo({lat, lng});
+
 			setPosition({lat, lng});
 			setMarkerShow(true);
 			setSearchedAddr(address);

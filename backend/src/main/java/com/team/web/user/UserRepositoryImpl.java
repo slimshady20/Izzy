@@ -9,6 +9,10 @@ import java.util.Optional;
 @Repository
 interface CustomedUserRepository{
     Optional<User> findByUserId(String userId);
+
+    Optional<User> findByUserNameAndEmail(String name, String email);
+
+    Optional<User> findByUserIdNameAndEmail(String userId, String name, String email);
 }
 public class UserRepositoryImpl  extends QuerydslRepositorySupport implements CustomedUserRepository {
     @Autowired
@@ -24,20 +28,30 @@ public class UserRepositoryImpl  extends QuerydslRepositorySupport implements Cu
 
         return Optional.ofNullable(findOne);
     }
+
     @Override
-    public Optional<User> findUserId(String name, String phone) {
+    public Optional<User> findByUserNameAndEmail(String name, String email) {
         QUser qUser = QUser.user;
-        User findId = queryFactory.selectFrom(qUser).where(qUser.name.eq(name)).fetchOne();
-        return Optional.ofNullable(findId);
+        User findOne = queryFactory.selectFrom(qUser).where(qUser.name.eq(name), qUser.email.eq(email)).fetchOne();
+        return Optional.ofNullable(findOne);
     }
 
+    @Override
+    public Optional<User> findByUserIdNameAndEmail(String userId, String name, String email) {
+        QUser qUser= QUser.user;
+        User findOne = queryFactory.selectFrom(qUser).where(qUser.userId.eq(userId),
+                qUser.name.eq(name),qUser.email.eq(email)).fetchOne();
+        return Optional.ofNullable(findOne);
+    }
+
+    /*
     @Override
     public Optional<User> findUserPw(String userId, String name, String phone) {
         QUser qUser = QUser.user;
         User findPw = queryFactory.selectFrom(qUser).where(qUser.userId.eq(userId), qUser.name.eq(name), qUser.phone.eq(phone)).fetchOne();
 
         return Optional.ofNullable(findPw);
-    }
+    }*/
 
 
 }

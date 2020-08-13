@@ -88,6 +88,11 @@ const Login = () => {
 											</MDBBtn>
 										</Link>
 									</div>
+									<span>
+										<Link to='/findId'>아이디 찾기</Link>
+										<br />
+										<Link to='/findPassword'>비밀번호 찾기</Link>
+									</span>
 								</MDBCardBody>
 								<MDBModalFooter className='mx-5 pt-3 mb-1'>
 									<p className='font-small grey-text d-flex justify-content-end'>

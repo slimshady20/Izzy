@@ -8,7 +8,7 @@ import {
 	MDBModalFooter,
 } from 'mdbreact';
 import {Link} from 'react-router-dom';
-import {Postcode} from '../Account';
+import {Postcode} from './';
 import axios from 'axios';
 
 const Signup = () => {

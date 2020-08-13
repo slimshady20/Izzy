@@ -7,13 +7,14 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+import com.team.web.article.Article;
 
 
 /**
  * QCategory is a Querydsl query type for Category
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QCategory extends EntityPathBase<Category> {
+public class QCategory extends EntityPathBase<Article> {
 
     private static final long serialVersionUID = -990092368L;
 
@@ -32,15 +33,15 @@ public class QCategory extends EntityPathBase<Category> {
     public final StringPath writer = createString("writer");
 
     public QCategory(String variable) {
-        super(Category.class, forVariable(variable));
+        super(Article.class, forVariable(variable));
     }
 
-    public QCategory(Path<? extends Category> path) {
+    public QCategory(Path<? extends Article> path) {
         super(path.getType(), path.getMetadata());
     }
 
     public QCategory(PathMetadata metadata) {
-        super(Category.class, metadata);
+        super(Article.class, metadata);
     }
 
 }

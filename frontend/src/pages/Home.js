@@ -23,7 +23,7 @@ import MovingType from '../components/move/component/MovingType';
 import {MovingEstimateForm} from '../components/move/component';
 import {MovingStartPoint} from '../components/move/component/movingPoint/index';
 import {CustomerInfo, Mypage, Order, Statistics} from './CompanyPage';
-import {Signup, Login} from './Account';
+import {Signup, Login, FindId, FindPassword} from './account';
 import ModalTest from '../components/modalTest/ModalTest';
 import VideoTest from '../components/videoUpload/VideoTest';
 import Weather from '../components/weather/Weather';
@@ -54,6 +54,8 @@ const Home = () => {
 				<Route path={'/movingDate'} component={MovingDate} />
 				<Route path={'/startPoint'} component={MovingStartPoint} />
 				<Route path='/login' component={Login} />
+				<Route path='/findId' component={FindId} />
+				<Route path='/findPassword' component={FindPassword} />
 				<Route path='/signup' component={Signup} />
 				<Route path='/mypage' component={Mypage} />
 				<Route path='/order' component={Order} />

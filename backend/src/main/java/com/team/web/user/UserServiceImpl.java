@@ -11,6 +11,14 @@ import java.util.Optional;
     Optional<User> findUserByUserId(String user);
 
     Optional<User> signUp(User user);
+
+    Optional<User> findUserByNameAndEmail(String name, String email);
+
+    Optional<User> findUserForResetPassword(String userId, String name, String email);
+
+    Optional<User> findUser(Long id);
+
+    User update(User selectUser);
 }
 @Service
 public class UserServiceImpl implements UserService {
@@ -39,5 +47,27 @@ public class UserServiceImpl implements UserService {
         User userData= userRepository.save(createUser);
 
         return Optional.of(userData); // ???
+    }
+
+    @Override
+    public Optional<User> findUserByNameAndEmail(String name, String email) {
+        Optional<User> findUser = userRepository.findByUserNameAndEmail(name, email);
+        return findUser;
+    }
+
+    @Override
+    public Optional<User> findUserForResetPassword(String userId, String name, String email) {
+        Optional<User> findUser = userRepository.findByUserIdNameAndEmail(userId,name,email);
+        return findUser;
+    }
+
+    @Override
+    public Optional<User> findUser(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public User update(User selectUser) {
+        return userRepository.save(selectUser);
     }
 }
