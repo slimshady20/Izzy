@@ -25,11 +25,9 @@ const Login = () => {
 			.then(response => {
 				console.log(response);
 				alert('로그인하였습니다.');
-				sessionStorage.setItem(
-					'MysessionStorageData',
-					JSON.stringify(response.data),
-				);
+				sessionStorage.setItem('userData', JSON.stringify(response.data));
 				if (response.status === 200) history.push('/');
+				window.location.reload();
 			})
 			.catch(error => {
 				alert('아이디 혹은 비밀번호가 틀렸습니다.');
@@ -76,17 +74,15 @@ const Login = () => {
 										</a>
 									</p>
 									<div className='text-center mb-3'>
-										<Link to='/mypage'>
-											<MDBBtn
-												type='button'
-												gradient='blue'
-												rounded
-												className='btn-block z-depth-1a'
-												onClick={handleSubmit}
-											>
-												Login
-											</MDBBtn>
-										</Link>
+										<MDBBtn
+											type='button'
+											gradient='blue'
+											rounded
+											className='btn-block z-depth-1a'
+											onClick={handleSubmit}
+										>
+											Login
+										</MDBBtn>
 									</div>
 									<span>
 										<Link to='/findId'>아이디 찾기</Link>

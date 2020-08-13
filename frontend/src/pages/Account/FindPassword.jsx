@@ -1,14 +1,7 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router';
 import axios from 'axios';
-import {
-	MDBBtn,
-	MDBCard,
-	MDBCardBody,
-	MDBCol,
-	MDBInput,
-	MDBModalFooter,
-} from 'mdbreact';
+import {MDBBtn, MDBCard, MDBCardBody, MDBCol, MDBInput} from 'mdbreact';
 import {Link} from 'react-router-dom';
 import {Modal} from 'react-bootstrap';
 const FindPassword = () => {
